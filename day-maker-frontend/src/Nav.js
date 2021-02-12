@@ -1,6 +1,7 @@
+
 function Nav() {
     return (
-        <p> anything </p>
+        <h1>Day Maker</h1>
     )
 }
 
