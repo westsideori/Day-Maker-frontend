@@ -7,7 +7,7 @@ function RestaurantsList ({restaurants}) {
     })
 
     return(
-        <div>
+        <div className="w3-row-padding">
             {restaurantItems}
         </div>
     )
