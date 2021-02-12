@@ -9,6 +9,7 @@ function Restaurant({restaurant}){
                 <h1>{restaurant.name}</h1>
                 <h2>{restaurant.location}</h2>
                 <h3>{restaurant.category}</h3>
+                <h3>{restaurant.cuisine}</h3>
                 <p>{restaurant.description}</p>
             </div>
         </div>
