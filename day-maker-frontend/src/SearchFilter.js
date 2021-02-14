@@ -1,9 +1,15 @@
-function SearchFilter() {
+function SearchFilter({searchTerm, setSearchTerm}) {
+
+    
+    const handleChange = (event) => {
+        setSearchTerm(event.target.value)
+    }
+
     return (
         
         <div className="w3-container" style={{width: '50%'}}>
             <h2 className="w3-text-blue">Search Restaurants</h2>     
-            <input className="w3-input w3-border" name="search" type="text" placeholder="Search..." />
+            <input value={searchTerm} onChange={handleChange} className="w3-input w3-border" name="search" type="text" placeholder="Search..." />
         </div>
         
     )

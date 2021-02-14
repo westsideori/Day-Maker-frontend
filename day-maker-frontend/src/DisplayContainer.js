@@ -17,6 +17,10 @@ const [restaurants, setRestaurants] = useState([])
 const [attractions, setAttractions] = useState([])
 const [days, setDays] = useState([])
 const [currentUser, setCurrentUser] = useState(null)
+const [breakfastRestaurants, setBreakfastRestaurants] = useState([])
+const [lunchRestaurants, setLunchRestaurants] = useState([])
+const [dinnerRestaurants, setDinnerRestaurants] = useState([])
+
 
 useEffect(() => {
     fetch(`http://localhost:3000/restaurants`)
@@ -43,7 +47,31 @@ useEffect(() => {
         })
 }, [])
 
+useEffect(() => {
+    fetch(`http://localhost:3000/restaurants/category/breakfast`)
+        .then(resp => resp.json())
+        .then(breakfastSpots => {
+            setBreakfastRestaurants(breakfastSpots)
+        })
+}, [])
 
+useEffect(() => {
+    fetch(`http://localhost:3000/restaurants/category/lunch`)
+        .then(resp => resp.json())
+        .then(lunchSpots => {
+            setLunchRestaurants(lunchSpots)
+        })
+}, [])
+
+useEffect(() => {
+    fetch(`http://localhost:3000/restaurants/category/dinner`)
+        .then(resp => resp.json())
+        .then(dinnerSpots => {
+            setDinnerRestaurants(dinnerSpots)
+        })
+}, [])
+
+console.log(breakfastRestaurants)
 
 
 
@@ -68,10 +96,16 @@ console.log(restaurants)
                     <RestaurantsList restaurants={restaurants} />
                 </Route>
                 <Route exact path="/days">
-                    <DaysList days={days}/>
+                    <DaysList days={days} setDays={setDays}/>
                 </Route>
                 <Route exact path="/new_day">
-                    <NewDay />
+                    <NewDay 
+                    breakfastRestaurants={breakfastRestaurants} 
+                    lunchRestaurants={lunchRestaurants}
+                    dinnerRestaurants={dinnerRestaurants}
+                    attractions={attractions} 
+                    days={days}
+                    setDays={setDays}/>
                 </Route>
                 <Route path="*">
                     <h1> 404 not found </h1>
