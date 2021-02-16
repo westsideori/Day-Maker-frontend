@@ -10,8 +10,8 @@ import Welcome from './Welcome';
 
 
 
+function DisplayContainer({currentUser, setCurrentUser}) {
 
-function DisplayContainer() {
 
     const [restaurants, setRestaurants] = useState([])
     const [attractions, setAttractions] = useState([])
@@ -21,7 +21,6 @@ function DisplayContainer() {
     const [days, setDays] = useState([])
     const [dayRests, setDayRests] = useState([])
     const [dayAttrs, setDayAttrs] = useState([])
-    const [currentUser, setCurrentUser] = useState(null)
     const [breakfastRestaurants, setBreakfastRestaurants] = useState([])
     const [lunchRestaurants, setLunchRestaurants] = useState([])
     const [dinnerRestaurants, setDinnerRestaurants] = useState([])
@@ -68,13 +67,17 @@ function DisplayContainer() {
     }, [])
 
     useEffect(() => {
-        fetch(`http://localhost:3000/users/1/days`)
-            .then(resp => resp.json())
-            .then(days => {
-
-                setDays(days)
-            })
-    }, [])
+        console.log(currentUser)
+        if(currentUser) {
+            
+            fetch(`http://localhost:3000/users/${currentUser.id}/days`)
+                .then(resp => resp.json())
+                .then(days => {
+                    setDays(days)
+                })
+            }
+        
+    }, [currentUser])
 
     useEffect(() => {
         fetch(`http://localhost:3000/restaurants/category/breakfast`)
@@ -137,19 +140,21 @@ function DisplayContainer() {
                     <Welcome />
                 </Route>
                 <Route exact path="/login">
-                    <Login />
+                    <Login setCurrentUser={setCurrentUser}/>
                 </Route>
                 <Route exact path="/signup">
-                    <Signup />
+                    <Signup setCurrentUser={setCurrentUser}/>
                 </Route>
                 <Route exact path="/attractions">
-                    <AttractionList attractions={attractions} />
+                    <AttractionList attractions={attractions} currentUser={currentUser} />
                 </Route>
                 <Route exact path="/restaurants">
-                    <RestaurantsList restaurants={restaurants} />
+                    <RestaurantsList restaurants={restaurants} currentUser={currentUser}/>
                 </Route>
                 <Route exact path="/days">
-                    <DaysList days={days}
+                    <DaysList 
+                        currentUser={currentUser}
+                        days={days}
                         setDays={setDays}
                         restaurants={restaurants}
                         breakfastRests={breakfastRestaurants}
@@ -167,6 +172,7 @@ function DisplayContainer() {
                 </Route>
                 <Route exact path="/new_day">
                     <NewDay
+                        currentUser={currentUser}
                         breakfastRestaurants={breakfastRestaurants}
                         lunchRestaurants={lunchRestaurants}
                         dinnerRestaurants={dinnerRestaurants}

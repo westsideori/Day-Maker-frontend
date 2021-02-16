@@ -1,8 +1,9 @@
-import {useState} from 'react';
-import {useHistory} from 'react-router-dom'
+import { useState } from 'react';
+import { useHistory, Link } from 'react-router-dom'
 
-function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay, morningAttractions, afternoonAttractions, eveningAttractions}) {
+function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay, morningAttractions, afternoonAttractions, eveningAttractions }) {
 
+    console.log(currentUser)
     const history = useHistory()
 
     const [newBreakfast, setNewBreakfast] = useState("")
@@ -17,12 +18,16 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
     const [isEditingEvent1, setIsEditingEvent1] = useState(false)
     const [isEditingEvent2, setIsEditingEvent2] = useState(false)
     const [isEditingEvent3, setIsEditingEvent3] = useState(false)
+    const [infoShowing, setInfoShowing] = useState(false)
 
     const { user_id, restaurants, attractions, day_restaurants, day_attractions } = day
-    console.log(day_attractions)
+
+    const toggleInfo = () => {
+        setInfoShowing((infoShowing) => !infoShowing)
+    }
 
     const getFreshDays = () => {
-        fetch('http://localhost:3000/days')
+        fetch(`http://localhost:3000/days`)
             .then(resp => resp.json())
             .then(daysArray => {
                 setDays(daysArray)
@@ -36,9 +41,7 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
     let afternoon = ""
     let evening = ""
 
-    console.log(day_attractions)
 
-    
     day_restaurants.forEach((rest) => {
         if (rest.restaurant.category === "breakfast") {
             breakfast = rest
@@ -48,7 +51,7 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
             dinner = rest
         }
     })
-    
+
     day_attractions.forEach((attr) => {
         if (attr.attraction.hour === "morning") {
             morning = attr
@@ -59,8 +62,7 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
         }
     })
 
-    console.log(day_attractions)
-    
+
 
     const toggleEditBreak = () => {
         setIsEditingBreak((isEditingBreak) => !isEditingBreak)
@@ -80,6 +82,7 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
     const toggleEditEvent3 = () => {
         setIsEditingEvent3((isEditingEvent3) => !isEditingEvent3)
     }
+
 
     const handleEditBreakfast = (id) => {
         const updatedBreakfast = {
@@ -101,7 +104,7 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
                 history.push("/days")
             })
     }
-    
+
     const handleEditLunch = (id) => {
         const updatedLunch = {
             day_id: day.id,
@@ -122,7 +125,7 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
                 history.push("/days")
             })
     }
-    
+
     const handleEditDinner = (id) => {
         const updatedDinner = {
             day_id: day.id,
@@ -161,7 +164,7 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
                 getFreshDays()
                 setIsEditingEvent1(false)
                 history.push("/days")
-                
+
             })
     }
 
@@ -206,37 +209,37 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
     }
 
     const bRestChoices = breakfastRests.map((rest) => {
-        return(
+        return (
             <option key={rest.id} value={rest.id}>{rest.name}</option>
         )
     })
 
     const lRestChoices = lunchRests.map((rest) => {
-        return(
+        return (
             <option key={rest.id} value={rest.id}>{rest.name}</option>
         )
     })
 
     const dRestChoices = dinnerRests.map((rest) => {
-        return(
+        return (
             <option key={rest.id} value={rest.id}>{rest.name}</option>
         )
     })
 
     const morningAttrChoices = morningAttractions.map((attr) => {
-        return(
+        return (
             <option key={attr.id} value={attr.id}>{attr.name}</option>
         )
     })
 
     const afternoonAttrChoices = afternoonAttractions.map((attr) => {
-        return(
+        return (
             <option key={attr.id} value={attr.id}>{attr.name}</option>
         )
     })
 
     const eveningAttrChoices = eveningAttractions.map((attr) => {
-        return(
+        return (
             <option key={attr.id} value={attr.id}>{attr.name}</option>
         )
     })
@@ -248,7 +251,7 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
     const editLunchChange = (e) => {
         setNewLunch(e.target.value)
     }
-    
+
     const editDinnerChange = (e) => {
         setNewDinner(e.target.value)
     }
@@ -272,13 +275,22 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
             .then(deleteDay(id))
     }
 
+    const changeColor = (e) => {
+        e.target.style.color = 'blue'
+    }
+
+    const changeColor2 = (e) => {
+        e.target.style.color = ''
+    }
+
     
+
     return (
         <div className="w3-third">
-            <h1>{day.date}</h1> 
+            <h1>{day.date}</h1>
             <div className="w3-card">
                 <button onClick={() => handleDelete(day.id)}>X</button>
-                <p>
+                <p onMouseEnter={changeColor} onMouseLeave={changeColor2} onClick={toggleInfo}>
                     Breakfast - {breakfast.restaurant.name}
                     {isEditingBreak ? (
                         <>
@@ -287,10 +299,21 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
                             </select>
                             <button onClick={() => handleEditBreakfast(breakfast.id)}>Save</button>
                         </>
-                        ) : (
-                        <button onClick={toggleEditBreak}>Edit</button>
-                    )}
+                    ) : (
+                            <button onClick={toggleEditBreak}>Edit</button>
+                        )}
+
                 </p>
+                {infoShowing ? (
+                    <div className="w3-card">
+                        <img className="w3-image w3-round" src={breakfast.restaurant.image} alt={breakfast.restaurant.name} />
+                        <h3>{breakfast.restaurant.cuisine}</h3>
+                        <h4>{breakfast.restaurant.category}</h4>
+                        <h5>{breakfast.restaurant.description}</h5>
+                    </div>
+                ): (
+                    null
+                )}
                 <p>
                     Morning Activity - {morning.attraction.name}
                     {isEditingEvent1 ? (
@@ -300,9 +323,9 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
                             </select>
                             <button onClick={() => handleEditEvent1(morning.id)}>Save</button>
                         </>
-                        ) : (
-                        <button onClick={toggleEditEvent1}>Edit</button>
-                    )}
+                    ) : (
+                            <button onClick={toggleEditEvent1}>Edit</button>
+                        )}
                 </p>
                 <p>
                     Lunch - {lunch.restaurant.name}
@@ -313,9 +336,9 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
                             </select>
                             <button onClick={() => handleEditLunch(lunch.id)}>Save</button>
                         </>
-                        ) : (
-                        <button onClick={toggleEditLunch}>Edit</button>
-                    )}
+                    ) : (
+                            <button onClick={toggleEditLunch}>Edit</button>
+                        )}
                 </p>
                 <p>
                     Afternoon Activity - {afternoon.attraction.name}
@@ -326,22 +349,22 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
                             </select>
                             <button onClick={() => handleEditEvent2(afternoon.id)}>Save</button>
                         </>
-                        ) : (
-                        <button onClick={toggleEditEvent2}>Edit</button>
-                    )}
+                    ) : (
+                            <button onClick={toggleEditEvent2}>Edit</button>
+                        )}
                 </p>
                 <p>
                     Dinner - {dinner.restaurant.name}
-                    {isEditingDinner? (
+                    {isEditingDinner ? (
                         <>
                             <select onChange={editDinnerChange}>
                                 {dRestChoices}
                             </select>
                             <button onClick={() => handleEditDinner(dinner.id)}>Save</button>
                         </>
-                        ) : (
-                        <button onClick={toggleEditDinner}>Edit</button>
-                    )}
+                    ) : (
+                            <button onClick={toggleEditDinner}>Edit</button>
+                        )}
                 </p>
                 <p>
                     Evening Activity - {evening.attraction.name}
@@ -352,9 +375,9 @@ function Day({ setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay,
                             </select>
                             <button onClick={() => handleEditEvent3(evening.id)}>Save</button>
                         </>
-                        ) : (
-                        <button onClick={toggleEditEvent3}>Edit</button>
-                    )}
+                    ) : (
+                            <button onClick={toggleEditEvent3}>Edit</button>
+                        )}
                 </p>
             </div>
         </div>

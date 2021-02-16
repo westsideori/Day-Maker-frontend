@@ -1,14 +1,36 @@
 import React from 'react';
 // import './App.css';
+import { useState, useEffect } from 'react';
 import Nav from "./Nav";
 import DisplayContainer from "./DisplayContainer";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  // autologin
+  useEffect(() => {
+    // TODO: check if there'a token for the logged in user
+    // GET /me
+    const token = localStorage.getItem("token");
+    if (token) {
+      fetch("http://localhost:3000/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((r) => r.json())
+        .then((user) => {
+          // set the user in state
+          setCurrentUser(user);
+        });
+    }
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-        <Nav />
-        <DisplayContainer />
+        <Nav currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+        <DisplayContainer currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       </header>
     </div>
   );

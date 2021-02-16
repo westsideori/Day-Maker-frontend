@@ -1,13 +1,13 @@
 import {useHistory} from 'react-router-dom'
 
-function NewDay({ days, setDays }) {
+function NewDay({ currentUser, days, setDays }) {
 
     const history = useHistory()
 
     const makeMyDay = () => {
         
         const newDay = {
-            user_id: 1,
+            user_id: currentUser.id,
             date: "January 20"
         }
         fetch(`http://localhost:3000/days`, {

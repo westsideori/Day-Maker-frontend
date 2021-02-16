@@ -1,7 +1,9 @@
 import SearchFilter3 from "./SearchFilter3";
 import Day from './Day'
 
-function DaysList({ days, setDays, breakfastRests, lunchRests, dinnerRests, setDayRests, dayRests, setDayAttrs, dayAttrs, handleUpdate, morningAttractions, eveningAttractions, afternoonAttractions }) {
+function DaysList({ currentUser, days, setDays, breakfastRests, lunchRests, dinnerRests, setDayRests, dayRests, setDayAttrs, dayAttrs, handleUpdate, morningAttractions, eveningAttractions, afternoonAttractions }) {
+
+   
 
     const deleteDay = (id) => {
         const updatedDays = days.filter((day) => {
@@ -31,6 +33,7 @@ function DaysList({ days, setDays, breakfastRests, lunchRests, dinnerRests, setD
             setDayAttrs={setDayAttrs}
             handleUpdate={handleUpdate}
             deleteDay={deleteDay}
+            currentUser={currentUser}
         />
     })
     return (
