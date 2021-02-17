@@ -45,7 +45,7 @@ function Login({ setCurrentUser }) {
                 <input className="w3-input w3-border" name="username" type="text" value={formData.username} onChange={handleChange} />
 
                 <label className="w3-text-blue"><b>Password</b></label>
-                <input className="w3-input w3-border" name="password" type="text" value={formData.password} onChange={handleChange} />
+                <input className="w3-input w3-border" name="password" type="password" value={formData.password} onChange={handleChange} />
                 {errors.map((error) => {
                     return <p key={error}>{error}</p>;
                 })}

@@ -37,7 +37,7 @@ function DaysList({ currentUser, days, setDays, breakfastRests, lunchRests, dinn
         />
     })
     return (
-        <div>
+        <div className="w3-row-padding">
             <SearchFilter3 />
             {dayItems}
         </div>

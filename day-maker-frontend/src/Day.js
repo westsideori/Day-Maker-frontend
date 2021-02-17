@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory} from 'react-router-dom'
 
 function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay, morningAttractions, afternoonAttractions, eveningAttractions }) {
 
@@ -27,7 +27,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
     }
 
     const getFreshDays = () => {
-        fetch(`http://localhost:3000/days`)
+        fetch(`http://localhost:3000/users/${currentUser.id}/days`)
             .then(resp => resp.json())
             .then(daysArray => {
                 setDays(daysArray)
@@ -286,8 +286,8 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
     
 
     return (
-        <div className="w3-third">
-            <h1>{day.date}</h1>
+        <div className="w3-third w3-container w3-margin-bottom">
+            <h1>{new Date(day.date).toDateString()}</h1>
             <div className="w3-card">
                 <button onClick={() => handleDelete(day.id)}>X</button>
                 <p onMouseEnter={changeColor} onMouseLeave={changeColor2} onClick={toggleInfo}>

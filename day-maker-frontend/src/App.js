@@ -6,6 +6,7 @@ import DisplayContainer from "./DisplayContainer";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
+  
 
   // autologin
   useEffect(() => {
@@ -13,6 +14,7 @@ function App() {
     // GET /me
     const token = localStorage.getItem("token");
     if (token) {
+      console.log(token)
       fetch("http://localhost:3000/me", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -21,11 +23,12 @@ function App() {
         .then((r) => r.json())
         .then((user) => {
           // set the user in state
-          setCurrentUser(user);
+          setCurrentUser(user)
         });
     }
   }, []);
 
+  
   return (
     <div className="App">
       <header className="App-header">
