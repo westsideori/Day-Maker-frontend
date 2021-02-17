@@ -7,7 +7,7 @@ function SearchFilter2({searchTerm, setSearchTerm}) {
     
     return(
         <div className="w3-container w3-margin-bottom" style={{width: '50%'}}>
-            <h2 className="w3-text-blue">Search Attractions</h2>     
+            <h2 className="w3-text-white">Search Attractions</h2>     
             <input value={searchTerm} onChange={handleChange} className="w3-input w3-border" name="search" type="text" placeholder="Search..." />
         </div>
     )

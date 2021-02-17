@@ -1,5 +1,6 @@
 import React from 'react';
-// import './App.css';
+import './App.css';
+// import './style.css'
 import { useState, useEffect } from 'react';
 import Nav from "./Nav";
 import DisplayContainer from "./DisplayContainer";

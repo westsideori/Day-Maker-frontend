@@ -1,33 +1,28 @@
-.modal {
-    font-size: 12px;
+.modal-test {
+    display: flex;
+    justify-content: center;
+    background: rgb(64, 62, 80);
+    color: white;
+    height: auto;
+    width: auto;
+    border-style: solid;
+    border-color: black;
+    border-radius: 25px;
+    padding: 40px
   }
-  .modal > .header {
-    width: 100%;
-    border-bottom: 1px solid gray;
-    font-size: 18px;
-    text-align: center;
-    padding: 5px;
-  }
-  .modal > .content {
-    width: 100%;
-    padding: 10px 5px;
-  }
-  .modal > .actions {
-    width: 100%;
-    padding: 10px 5px;
-    margin: auto;
-    text-align: center;
-  }
-  .modal > .close {
-    cursor: pointer;
-    position: absolute;
+
+.modal-test img {
+    border-radius: 25px;
     display: block;
-    padding: 2px 5px;
-    line-height: 20px;
-    right: -10px;
-    top: -10px;
-    font-size: 24px;
-    background: #ffffff;
-    border-radius: 18px;
-    border: 1px solid #cfcece;
-  }
+    margin: auto;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: Bradley Hand, cursive;
+    font-weight: bold;
+}
+
+label {
+    color: white;
+}
+

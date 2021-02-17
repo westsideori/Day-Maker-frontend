@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 import Popup from "reactjs-popup"
+import './style.css'
+
 
 function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRests, deleteDay, morningAttractions, afternoonAttractions, eveningAttractions }) {
 
@@ -19,13 +21,10 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
     const [isEditingEvent1, setIsEditingEvent1] = useState(false)
     const [isEditingEvent2, setIsEditingEvent2] = useState(false)
     const [isEditingEvent3, setIsEditingEvent3] = useState(false)
-    const [infoShowing, setInfoShowing] = useState(false)
+    
 
     const { user_id, restaurants, attractions, day_restaurants, day_attractions } = day
 
-    const toggleInfo = () => {
-        setInfoShowing((infoShowing) => !infoShowing)
-    }
 
     const getFreshDays = () => {
         fetch(`http://localhost:3000/users/${currentUser.id}/days`)
@@ -288,154 +287,171 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
 
     return (
         <>
-            <div className="w3-third w3-container w3-margin-bottom">
-                <h1>{new Date(day.date).toDateString()}</h1>
+            <div className="w3-third w3-container w3-margin-bottom w3-round" style={{ background: "white", "border-style": "solid" }}>
+                <h1 style={{"font-family": "Bradley Hand, cursive"}}>{new Date(day.date).toDateString()}</h1>
                 <Popup
                     trigger={
                         <div>
                             <button onClick={() => handleDelete(day.id)}>X</button>
                             <div style={{ position: "relative" }}>
-                                <h4 style={{ cursor: "pointer" }} onMouseEnter={changeColor} onMouseLeave={changeColor2} onClick={toggleInfo}>
-                                    Breakfast - {breakfast.restaurant.name}
+                                <h4 style={{ cursor: "pointer" }} onMouseEnter={changeColor} onMouseLeave={changeColor2} >
+                                    <b>Breakfast</b> 🍳 - {breakfast.restaurant.name}
                                 </h4>
-                                {isEditingBreak ? (
-                                    <>
-                                        <select onChange={editBreakfastChange}>
-                                            {bRestChoices}
-                                        </select>
-                                        <button onClick={() => handleEditBreakfast(breakfast.id)}>Save</button>
-                                    </>
-                                ) : (
-                                        <button className="w3-button w3-blue w3-display-right w3-margin-right" onClick={toggleEditBreak}>✎</button>
-                                    )}
+
                             </div>
                         </div>}
                     modal>
-                    <div className="w3-card">
-                        <img style={{ width: "300px" }} className="w3-image w3-round" src={breakfast.restaurant.image} alt={breakfast.restaurant.name} />
-                        <h3>{breakfast.restaurant.cuisine}</h3>
-                        <h4>{breakfast.restaurant.category}</h4>
-                        <h5>{breakfast.restaurant.description}</h5>
+                    <div className="w3-container modal-test">
+                        <div className="content">
+                            <img style={{ width: "300px" }} className="w3-image w3-round" src={breakfast.restaurant.image} alt={breakfast.restaurant.name} />
+                            <h3><b>Cuisine: </b>{breakfast.restaurant.cuisine}</h3>
+                            <h4><b>Category: </b>{breakfast.restaurant.category}</h4>
+                            <h5><b>Description: </b>{breakfast.restaurant.description}</h5>
+                        </div>
                     </div>
                 </Popup>
+                {isEditingBreak ? (
+                    <>
+                        <select onChange={editBreakfastChange}>
+                            {bRestChoices}
+                        </select>
+                        <button onClick={() => handleEditBreakfast(breakfast.id)}>Save</button>
+                    </>
+                ) : (
+                        <button className="w3-button w3-blue  w3-margin-right" onClick={toggleEditBreak}>✎</button>
+                    )}
                 <Popup
                     trigger={
                         <div style={{ position: "relative" }}>
-                            <h4 style={{ cursor: "pointer" }} onMouseEnter={changeColor} onMouseLeave={changeColor2} onClick={toggleInfo}>
-                                Morning Activity - {morning.attraction.name}
+                            <h4 style={{ cursor: "pointer" }} onMouseEnter={changeColor} onMouseLeave={changeColor2} >
+                                <b>Morning Activity</b> 🏃‍♀️ - {morning.attraction.name}
                             </h4>
-                            {isEditingEvent1 ? (
-                                <>
-                                    <select onChange={editEvent1Change}>
-                                        {morningAttrChoices}
-                                    </select>
-                                    <button onClick={() => handleEditEvent1(morning.id)}>Save</button>
-                                </>
-                            ) : (
-                                    <button className="w3-button w3-blue w3-display-right w3-margin-right" onClick={toggleEditBreak}>✎</button>
-                                )}
+
                         </div>}
                     modal>
-                    <div className="w3-card">
-                        <img style={{ width: "300px" }} className="w3-image w3-round" src={morning.attraction.image} alt={morning.attraction.name} />
-                        <h3>{morning.attraction.category}</h3>
-                        <h4>{morning.attraction.description}</h4>
+                    <div className="w3-container modal-test">
+                        <div className="content">
+                            <img style={{ width: "300px" }} className="w3-image w3-round" src={morning.attraction.image} alt={morning.attraction.name} />
+                            <h3><b>Category: </b>{morning.attraction.category}</h3>
+                            <h4><b>Description: </b>{morning.attraction.description}</h4>
+                        </div>
                     </div>
                 </Popup>
+                {isEditingEvent1 ? (
+                    <>
+                        <select onChange={editEvent1Change}>
+                            {morningAttrChoices}
+                        </select>
+                        <button onClick={() => handleEditEvent1(morning.id)}>Save</button>
+                    </>
+                ) : (
+                        <button className="w3-button w3-blue w3-margin-right" onClick={toggleEditEvent1}>✎</button>
+                    )}
                 <Popup
                     trigger={<div style={{ position: "relative" }}>
-                        <h4 style={{ cursor: "pointer" }} onMouseEnter={changeColor} onMouseLeave={changeColor2} onClick={toggleInfo}>
-                            Lunch - {lunch.restaurant.name}
+                        <h4 style={{ cursor: "pointer" }} onMouseEnter={changeColor} onMouseLeave={changeColor2} >
+                            <b>Lunch</b> 🥪 - {lunch.restaurant.name}
                         </h4>
-                        {isEditingLunch ? (
-                            <>
-                                <select onChange={editLunchChange}>
-                                    {lRestChoices}
-                                </select>
-                                <button onClick={() => handleEditLunch(lunch.id)}>Save</button>
-                            </>
-                        ) : (
-                                <button className="w3-button w3-blue w3-display-right w3-margin-right" onClick={toggleEditBreak}>✎</button>
-                            )}
+
                     </div>}
                     modal>
-                    <div className="w3-card">
-                        <img style={{ width: "300px" }} className="w3-image w3-round" src={lunch.restaurant.image} alt={lunch.restaurant.name} />
-                        <h3>{lunch.restaurant.cuisine}</h3>
-                        <h4>{lunch.restaurant.category}</h4>
-                        <h5>{lunch.restaurant.description}</h5>
+                    <div className="w3-container modal-test">
+                        <div className="content">
+                            <img style={{ width: "300px" }} className="w3-image w3-round" src={lunch.restaurant.image} alt={lunch.restaurant.name} />
+                            <h3><b>Cuisine: </b>{lunch.restaurant.cuisine}</h3>
+                            <h4><b>Category: </b>{lunch.restaurant.category}</h4>
+                            <h5><b>Description: </b>{lunch.restaurant.description}</h5>
+                        </div>
                     </div>
                 </Popup>
+                {isEditingLunch ? (
+                    <>
+                        <select onChange={editLunchChange}>
+                            {lRestChoices}
+                        </select>
+                        <button onClick={() => handleEditLunch(lunch.id)}>Save</button>
+                    </>
+                ) : (
+                        <button className="w3-button w3-blue w3-margin-right" onClick={toggleEditLunch}>✎</button>
+                    )}
                 <Popup
                     trigger={<div style={{ position: "relative" }}>
-                        <h4 style={{ cursor: "pointer" }} onMouseEnter={changeColor} onMouseLeave={changeColor2} onClick={toggleInfo}>
-                            Afternoon Activity - {afternoon.attraction.name}
+                        <h4 style={{ cursor: "pointer" }} onMouseEnter={changeColor} onMouseLeave={changeColor2} >
+                            <b>Afternoon Activity</b> 🏃‍♀️ - {afternoon.attraction.name}
                         </h4>
-                        {isEditingEvent2 ? (
-                            <>
-                                <select onChange={editEvent2Change}>
-                                    {afternoonAttrChoices}
-                                </select>
-                                <button onClick={() => handleEditEvent2(afternoon.id)}>Save</button>
-                            </>
-                        ) : (
-                                <button className="w3-button w3-blue w3-display-right w3-margin-right" onClick={toggleEditBreak}>✎</button>
-                            )}
                     </div>}
                     modal>
-                    <div className="w3-card">
-                        <img style={{ width: "300px" }} className="w3-image w3-round" src={afternoon.attraction.image} alt={afternoon.attraction.name} />
-                        <h3>{afternoon.attraction.category}</h3>
-                        <h4>{afternoon.attraction.description}</h4>
+                    <div className="w3-container modal-test">
+                        <div className="content">
+                            <img style={{ width: "300px" }} className="w3-image w3-round" src={afternoon.attraction.image} alt={afternoon.attraction.name} />
+                            <h3><b>Category: </b>{afternoon.attraction.category}</h3>
+                            <h4><b>Description: </b>{afternoon.attraction.description}</h4>
+                        </div>
                     </div>
                 </Popup>
+                {isEditingEvent2 ? (
+                    <>
+                        <select onChange={editEvent2Change}>
+                            {afternoonAttrChoices}
+                        </select>
+                        <button onClick={() => handleEditEvent2(afternoon.id)}>Save</button>
+                    </>
+                ) : (
+                        <button className="w3-button w3-blue w3-margin-right" onClick={toggleEditEvent2}>✎</button>
+                    )}
                 <Popup
                     trigger={<div style={{ position: "relative" }}>
-                        <h4 style={{ cursor: "pointer" }} onMouseEnter={changeColor} onMouseLeave={changeColor2} onClick={toggleInfo}>
-                            Dinner - {dinner.restaurant.name}
+                        <h4 style={{ cursor: "pointer" }} onMouseEnter={changeColor} onMouseLeave={changeColor2} >
+                            <b>Dinner</b> 🍝 - {dinner.restaurant.name}
                         </h4>
-                        {isEditingDinner ? (
-                            <>
-                                <select onChange={editDinnerChange}>
-                                    {dRestChoices}
-                                </select>
-                                <button onClick={() => handleEditDinner(dinner.id)}>Save</button>
-                            </>
-                        ) : (
-                                <button className="w3-button w3-blue w3-display-right w3-margin-right" onClick={toggleEditBreak}>✎</button>
-                            )}
+
                     </div>}
                     modal>
-                    <div className="w3-card">
-                        <img style={{ width: "300px" }} className="w3-image w3-round" src={dinner.restaurant.image} alt={dinner.restaurant.name} />
-                        <h3>{dinner.restaurant.cuisine}</h3>
-                        <h4>{dinner.restaurant.category}</h4>
-                        <h5>{dinner.restaurant.description}</h5>
+                    <div className="w3-container modal-test">
+                        <div className="content">
+                            <img style={{ width: "300px" }} className="w3-image w3-round" src={dinner.restaurant.image} alt={dinner.restaurant.name} />
+                            <h3><b>Cuisine: </b>{dinner.restaurant.cuisine}</h3>
+                            <h4><b>Category: </b>{dinner.restaurant.category}</h4>
+                            <h5><b>Description: </b>{dinner.restaurant.description}</h5>
+                        </div>
                     </div>
                 </Popup>
+                {isEditingDinner ? (
+                    <>
+                        <select onChange={editDinnerChange}>
+                            {dRestChoices}
+                        </select>
+                        <button onClick={() => handleEditDinner(dinner.id)}>Save</button>
+                    </>
+                ) : (
+                        <button className="w3-button w3-blue w3-margin-right" onClick={toggleEditDinner}>✎</button>
+                    )}
                 <Popup
                     trigger={<div style={{ position: "relative" }}>
-                        <h4 className="w3-margin-bottom" style={{ cursor: "pointer" }} onMouseEnter={changeColor} onMouseLeave={changeColor2} onClick={toggleInfo}>
-                            Evening Activity - {evening.attraction.name}
+                        <h4 className="w3-margin-bottom" style={{ cursor: "pointer" }} onMouseEnter={changeColor} onMouseLeave={changeColor2} >
+                            <b>Evening Activity</b> 🏃‍♀️ - {evening.attraction.name}
                         </h4>
-                        {isEditingEvent3 ? (
-                            <>
-                                <select onChange={editEvent3Change}>
-                                    {eveningAttrChoices}
-                                </select>
-                                <button onClick={() => handleEditEvent3(evening.id)}>Save</button>
-                            </>
-                        ) : (
-                                <button className="w3-button w3-blue w3-display-right w3-margin-right" onClick={toggleEditBreak}>✎</button>
-                            )}
+
                     </div>}
                     modal>
-                    <div className="w3-card">
-                        <img style={{ width: "300px" }} className="w3-image w3-round" src={evening.attraction.image} alt={evening.attraction.name} />
-                        <h3>{evening.attraction.category}</h3>
-                        <h4>{evening.attraction.description}</h4>
+                    <div className="w3-container modal-test">
+                        <div className="content">
+                            <img style={{ width: "300px" }} className="w3-image w3-round" src={evening.attraction.image} alt={evening.attraction.name} />
+                            <h3><b>Category: </b>{evening.attraction.category}</h3>
+                            <h4><b>Description: </b>{evening.attraction.description}</h4>
+                        </div>
                     </div>
                 </Popup>
+                {isEditingEvent3 ? (
+                    <>
+                        <select onChange={editEvent3Change}>
+                            {eveningAttrChoices}
+                        </select>
+                        <button onClick={() => handleEditEvent3(evening.id)}>Save</button>
+                    </>
+                ) : (
+                        <button className="w3-button w3-blue w3-margin-right" onClick={toggleEditEvent3}>✎</button>
+                    )}
 
             </div>
 

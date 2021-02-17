@@ -16,13 +16,22 @@ function NewDay({ currentUser, days, setDays }) {
     }
 
     const makeMyDay = () => {
+
+        const dateArray = formData.date.split("-")
+
+        const [year, month, day] = dateArray
+
+        const newDayObj = {
+            ...formData,
+            date: `${year}` + `-` + `${month}` + `-` + `${parseInt(day) + 1}`
+        }
         
         fetch(`http://localhost:3000/days`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(newDayObj)
         })
             .then(resp => resp.json())
             .then(dayObj => {
@@ -33,9 +42,9 @@ function NewDay({ currentUser, days, setDays }) {
     }
     
     return (
-        <div className="w3-panel">
+        <div style={{margin: "auto", width: "25%", padding: "10px", marginTop: "25px"}}>
             <input type="date" value={formData.date} onChange={handleChange}></input>
-            <button onClick={makeMyDay} className="w3-button w3-blue">Make My Day!</button>
+            <button onClick={makeMyDay} className="w3-button w3-indigo">Make My Day!</button>
         </div>
     )
 }

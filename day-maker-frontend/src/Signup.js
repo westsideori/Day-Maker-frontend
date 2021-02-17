@@ -48,21 +48,23 @@ function Signup({setCurrentUser}) {
       }
     
     return (
+      <div className="w3-container" style={{margin: "auto", width: "25%", padding: "10px", marginTop: "25px"}}>
         <form className="w3-container w3-card-4" onSubmit={handleSignup}>
-            <h2 className="w3-text-blue">Signup</h2>     
-            <label className="w3-text-blue"><b>Name</b></label>
+            <h2 className="w3-text-white" >Signup</h2>     
+            <label className="w3-text-white"><b>Name</b></label>
             <input className="w3-input w3-border" name="name" type="text" value={formData.name} onChange={handleChange}/>
             
-            <label className="w3-text-blue"><b>Username</b></label>
+            <label className="w3-text-white"><b>Username</b></label>
             <input className="w3-input w3-border" name="username" type="text" value={formData.username} onChange={handleChange}/>
 
-            <label className="w3-text-blue"><b>Password</b></label>
+            <label className="w3-text-white"><b>Password</b></label>
             <input className="w3-input w3-border" name="password" type="password" value={formData.password} onChange={handleChange}/>
             {errors.map((error) => {
-                return <p key={error}>{error}</p>;
+                return <p style={{color: "red"}} key={error}>{error}</p>;
             })}
-            <input className="w3-btn w3-blue" type="submit" value="Signup"/>
+            <input className="w3-btn w3-indigo" type="submit" value="Signup"/>
         </form>
+      </div>
     )
 }
 

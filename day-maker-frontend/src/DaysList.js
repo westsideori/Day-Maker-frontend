@@ -1,9 +1,14 @@
 import SearchFilter3 from "./SearchFilter3";
 import Day from './Day'
+import {useState} from 'react';
 
 function DaysList({ currentUser, days, setDays, breakfastRests, lunchRests, dinnerRests, setDayRests, dayRests, setDayAttrs, dayAttrs, handleUpdate, morningAttractions, eveningAttractions, afternoonAttractions }) {
 
-   
+    const [searchTerm, setSearchTerm] = useState("")
+
+    const filteredDays = days.filter((day) => {
+        return new Date(day.date).toString().toLowerCase().includes(searchTerm.toLowerCase())
+    })
 
     const deleteDay = (id) => {
         const updatedDays = days.filter((day) => {
@@ -13,7 +18,7 @@ function DaysList({ currentUser, days, setDays, breakfastRests, lunchRests, dinn
         setDays(updatedDays)
       }
 
-    const dayItems = days.map((day) => {
+    const dayItems = filteredDays.map((day) => {
         return <Day
             key={day.id}
             day={day}
@@ -34,11 +39,13 @@ function DaysList({ currentUser, days, setDays, breakfastRests, lunchRests, dinn
             handleUpdate={handleUpdate}
             deleteDay={deleteDay}
             currentUser={currentUser}
+
+            
         />
     })
     return (
         <div className="w3-row-padding">
-            <SearchFilter3 />
+            <SearchFilter3 searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
             {dayItems}
         </div>
     )

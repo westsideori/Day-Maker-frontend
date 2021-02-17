@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,19 @@
   to {
     transform: rotate(360deg);
   }
+} */
+body {
+  background-image: url("https://images.squarespace-cdn.com/content/v1/5bf0ccef1137a6677f94eeaa/1574272758585-S5POPIB276UBLACHH6YL/ke17ZwdGBToddI8pDm48kHD0YvchjwFT3hTRLHC2uPBZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIOVKHs67edo9URetqIXcJRlw5cLPR3f5w5cDYudr5AwIKMshLAGzx4R3EDFOm1kBS/new+york+city+skyline+black+and+white+thumb.jpg?format=1000w");
+  height: 100%;
+  /* background-position: center; */
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: Bradley Hand, cursive;
+  font-weight: bold;
 }
+
+label {
+  font-family: Bradley Hand, cursive;
+  font-weight: bold;
+}
+

@@ -17,7 +17,7 @@ function Nav({ currentUser, setCurrentUser }) {
 
 
     return (
-        <nav className="w3-bar w3-blue">
+        <nav className="w3-bar w3-indigo">
             <NavLink className="w3-bar-item w3-button" exact to="/">Home</NavLink>
             <NavLink className="w3-bar-item w3-button" to="/attractions">Attractions</NavLink>
             <NavLink className="w3-bar-item w3-button" to="/restaurants">Restaurants</NavLink>
