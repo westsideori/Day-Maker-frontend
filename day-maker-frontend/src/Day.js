@@ -290,20 +290,21 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
             <h1>{new Date(day.date).toDateString()}</h1>
             <div className="w3-card">
                 <button onClick={() => handleDelete(day.id)}>X</button>
-                <p onMouseEnter={changeColor} onMouseLeave={changeColor2} onClick={toggleInfo}>
-                    Breakfast - {breakfast.restaurant.name}
+                <div style={{position: "relative"}}>
+                    <h4 style={{cursor: "pointer"}} onMouseEnter={changeColor} onMouseLeave={changeColor2} onClick={toggleInfo}>
+                        Breakfast - {breakfast.restaurant.name}
+                    </h4>
                     {isEditingBreak ? (
-                        <>
-                            <select onChange={editBreakfastChange}>
-                                {bRestChoices}
-                            </select>
-                            <button onClick={() => handleEditBreakfast(breakfast.id)}>Save</button>
-                        </>
-                    ) : (
-                            <button onClick={toggleEditBreak}>Edit</button>
-                        )}
-
-                </p>
+                            <>
+                                <select onChange={editBreakfastChange}>
+                                    {bRestChoices}
+                                </select>
+                                <button onClick={() => handleEditBreakfast(breakfast.id)}>Save</button>
+                            </>
+                        ) : (
+                                <button className="w3-button w3-blue w3-display-right w3-margin-right" onClick={toggleEditBreak}>✎</button>
+                            )}
+                </div>
                 {infoShowing ? (
                     <div className="w3-card">
                         <img className="w3-image w3-round" src={breakfast.restaurant.image} alt={breakfast.restaurant.name} />
