@@ -307,6 +307,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                             <h3><b>Cuisine: </b>{breakfast.restaurant.cuisine}</h3>
                             <h4><b>Category: </b>{breakfast.restaurant.category}</h4>
                             <h5><b>Description: </b>{breakfast.restaurant.description}</h5>
+                            <h5><b>Location: </b>{breakfast.restaurant.location}</h5>
                         </div>
                     </div>
                 </Popup>
@@ -334,6 +335,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                             <img style={{ width: "300px", border: "solid", borderColor: "black" }} className="w3-image w3-round" src={morning.attraction.image} alt={morning.attraction.name} />
                             <h3><b>Category: </b>{morning.attraction.category}</h3>
                             <h4><b>Description: </b>{morning.attraction.description}</h4>
+                            <h5><b>Location: </b>{morning.attraction.location}</h5>
                         </div>
                     </div>
                 </Popup>
@@ -361,6 +363,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                             <h3><b>Cuisine: </b>{lunch.restaurant.cuisine}</h3>
                             <h4><b>Category: </b>{lunch.restaurant.category}</h4>
                             <h5><b>Description: </b>{lunch.restaurant.description}</h5>
+                            <h5><b>Location: </b>{lunch.restaurant.location}</h5>
                         </div>
                     </div>
                 </Popup>
@@ -386,6 +389,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                             <img style={{ width: "300px", border: "solid", borderColor: "black" }} className="w3-image w3-round" src={afternoon.attraction.image} alt={afternoon.attraction.name} />
                             <h3><b>Category: </b>{afternoon.attraction.category}</h3>
                             <h4><b>Description: </b>{afternoon.attraction.description}</h4>
+                            <h5><b>Location: </b>{afternoon.attraction.location}</h5>
                         </div>
                     </div>
                 </Popup>
@@ -413,6 +417,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                             <h3><b>Cuisine: </b>{dinner.restaurant.cuisine}</h3>
                             <h4><b>Category: </b>{dinner.restaurant.category}</h4>
                             <h5><b>Description: </b>{dinner.restaurant.description}</h5>
+                            <h5><b>Location: </b>{dinner.restaurant.location}</h5>
                         </div>
                     </div>
                 </Popup>
@@ -439,6 +444,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                             <img style={{ width: "300px", border: "solid", borderColor: "black" }} className="w3-image w3-round" src={evening.attraction.image} alt={evening.attraction.name} />
                             <h3><b>Category: </b>{evening.attraction.category}</h3>
                             <h4><b>Description: </b>{evening.attraction.description}</h4>
+                            <h5><b>Location: </b>{evening.attraction.location}</h5>
                         </div>
                     </div>
                 </Popup>
