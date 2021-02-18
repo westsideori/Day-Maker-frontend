@@ -49,7 +49,7 @@ function Login({ setCurrentUser }) {
                 {errors.map((error) => {
                     return <p style={{color: "red"}} key={error}>{error}</p>;
                 })}
-                <input className="w3-btn w3-blue" type="submit" value="Login" />
+                <input className="w3-btn w3-indigo" type="submit" value="Login" />
             </form>
         </div>
     )
