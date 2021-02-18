@@ -17,7 +17,7 @@ function Attraction({ attraction }) {
             modal>
             <div className="w3-container modal-test" >
                 <div className="content" >
-                    <img src={attraction.image} alt={attraction.name} className="w3-round" style={{ width: "300px"}} />
+                    <img src={attraction.image} alt={attraction.name} className="w3-round" style={{ width: "300px", border: "solid", borderColor: "black"}} />
                     <h2><b>Name: </b>{attraction.name}</h2>
                     <h3><b>Category: </b>{attraction.category}</h3>
                     <p><b>Description: </b>{attraction.description}</p>

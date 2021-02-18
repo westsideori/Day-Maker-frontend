@@ -17,8 +17,8 @@ function Restaurant({ restaurant }) {
                 </div>}
             modal>
                 <div className="w3-container modal-test" >
-                    <div className="content" >
-                        <img src={restaurant.image} alt={restaurant.name} style={{ width: "300px" }}/>
+                    <div className="content">
+                        <img src={restaurant.image} alt={restaurant.name} style={{ width: "300px", border: "solid", borderColor: "black" }}/>
                         <h3><b>Cuisine:</b> {restaurant.cuisine}</h3>
                         <h4><b>Category:</b> {restaurant.category}</h4>
                         <p><b>About:</b> {restaurant.description}</p>

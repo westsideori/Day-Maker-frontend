@@ -21,7 +21,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
     const [isEditingEvent1, setIsEditingEvent1] = useState(false)
     const [isEditingEvent2, setIsEditingEvent2] = useState(false)
     const [isEditingEvent3, setIsEditingEvent3] = useState(false)
-    
+
 
     const { user_id, restaurants, attractions, day_restaurants, day_attractions } = day
 
@@ -288,11 +288,11 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
     return (
         <>
             <div className="w3-third w3-container w3-margin-bottom w3-round" style={{ background: "white", "border-style": "solid" }}>
-                <h1 style={{"font-family": "Bradley Hand, cursive"}}>{new Date(day.date).toDateString()}</h1>
+                <button className="w3-display-topright" style={{ position: "relative", marginLeft: "400px", marginTop: "10px" }} onClick={() => handleDelete(day.id)}>X</button>
+                <h1 style={{ "font-family": "Bradley Hand, cursive" }}>{new Date(day.date).toDateString()}</h1>
                 <Popup
                     trigger={
                         <div>
-                            <button onClick={() => handleDelete(day.id)}>X</button>
                             <div style={{ position: "relative" }}>
                                 <h4 style={{ cursor: "pointer" }} onMouseEnter={changeColor} onMouseLeave={changeColor2} >
                                     <b>Breakfast</b> 🍳 - {breakfast.restaurant.name}
@@ -303,7 +303,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                     modal>
                     <div className="w3-container modal-test">
                         <div className="content">
-                            <img style={{ width: "300px" }} className="w3-image w3-round" src={breakfast.restaurant.image} alt={breakfast.restaurant.name} />
+                            <img style={{ width: "300px", border: "solid", borderColor: "black" }} className="w3-image w3-round" src={breakfast.restaurant.image} alt={breakfast.restaurant.name} />
                             <h3><b>Cuisine: </b>{breakfast.restaurant.cuisine}</h3>
                             <h4><b>Category: </b>{breakfast.restaurant.category}</h4>
                             <h5><b>Description: </b>{breakfast.restaurant.description}</h5>
@@ -318,7 +318,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                         <button onClick={() => handleEditBreakfast(breakfast.id)}>Save</button>
                     </>
                 ) : (
-                        <button className="w3-button w3-blue  w3-margin-right" onClick={toggleEditBreak}>✎</button>
+                        <button className="w3-button w3-indigo  w3-margin-right" onClick={toggleEditBreak}>✎</button>
                     )}
                 <Popup
                     trigger={
@@ -331,7 +331,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                     modal>
                     <div className="w3-container modal-test">
                         <div className="content">
-                            <img style={{ width: "300px" }} className="w3-image w3-round" src={morning.attraction.image} alt={morning.attraction.name} />
+                            <img style={{ width: "300px", border: "solid", borderColor: "black" }} className="w3-image w3-round" src={morning.attraction.image} alt={morning.attraction.name} />
                             <h3><b>Category: </b>{morning.attraction.category}</h3>
                             <h4><b>Description: </b>{morning.attraction.description}</h4>
                         </div>
@@ -345,7 +345,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                         <button onClick={() => handleEditEvent1(morning.id)}>Save</button>
                     </>
                 ) : (
-                        <button className="w3-button w3-blue w3-margin-right" onClick={toggleEditEvent1}>✎</button>
+                        <button className="w3-button w3-indigo w3-margin-right" onClick={toggleEditEvent1}>✎</button>
                     )}
                 <Popup
                     trigger={<div style={{ position: "relative" }}>
@@ -357,7 +357,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                     modal>
                     <div className="w3-container modal-test">
                         <div className="content">
-                            <img style={{ width: "300px" }} className="w3-image w3-round" src={lunch.restaurant.image} alt={lunch.restaurant.name} />
+                            <img style={{ width: "300px", border: "solid", borderColor: "black" }} className="w3-image w3-round" src={lunch.restaurant.image} alt={lunch.restaurant.name} />
                             <h3><b>Cuisine: </b>{lunch.restaurant.cuisine}</h3>
                             <h4><b>Category: </b>{lunch.restaurant.category}</h4>
                             <h5><b>Description: </b>{lunch.restaurant.description}</h5>
@@ -372,7 +372,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                         <button onClick={() => handleEditLunch(lunch.id)}>Save</button>
                     </>
                 ) : (
-                        <button className="w3-button w3-blue w3-margin-right" onClick={toggleEditLunch}>✎</button>
+                        <button className="w3-button w3-indigo w3-margin-right" onClick={toggleEditLunch}>✎</button>
                     )}
                 <Popup
                     trigger={<div style={{ position: "relative" }}>
@@ -383,7 +383,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                     modal>
                     <div className="w3-container modal-test">
                         <div className="content">
-                            <img style={{ width: "300px" }} className="w3-image w3-round" src={afternoon.attraction.image} alt={afternoon.attraction.name} />
+                            <img style={{ width: "300px", border: "solid", borderColor: "black" }} className="w3-image w3-round" src={afternoon.attraction.image} alt={afternoon.attraction.name} />
                             <h3><b>Category: </b>{afternoon.attraction.category}</h3>
                             <h4><b>Description: </b>{afternoon.attraction.description}</h4>
                         </div>
@@ -397,7 +397,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                         <button onClick={() => handleEditEvent2(afternoon.id)}>Save</button>
                     </>
                 ) : (
-                        <button className="w3-button w3-blue w3-margin-right" onClick={toggleEditEvent2}>✎</button>
+                        <button className="w3-button w3-indigo w3-margin-right" onClick={toggleEditEvent2}>✎</button>
                     )}
                 <Popup
                     trigger={<div style={{ position: "relative" }}>
@@ -409,7 +409,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                     modal>
                     <div className="w3-container modal-test">
                         <div className="content">
-                            <img style={{ width: "300px" }} className="w3-image w3-round" src={dinner.restaurant.image} alt={dinner.restaurant.name} />
+                            <img style={{ width: "300px", border: "solid", borderColor: "black" }} className="w3-image w3-round" src={dinner.restaurant.image} alt={dinner.restaurant.name} />
                             <h3><b>Cuisine: </b>{dinner.restaurant.cuisine}</h3>
                             <h4><b>Category: </b>{dinner.restaurant.category}</h4>
                             <h5><b>Description: </b>{dinner.restaurant.description}</h5>
@@ -424,7 +424,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                         <button onClick={() => handleEditDinner(dinner.id)}>Save</button>
                     </>
                 ) : (
-                        <button className="w3-button w3-blue w3-margin-right" onClick={toggleEditDinner}>✎</button>
+                        <button className="w3-button w3-indigo w3-margin-right" onClick={toggleEditDinner}>✎</button>
                     )}
                 <Popup
                     trigger={<div style={{ position: "relative" }}>
@@ -436,7 +436,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                     modal>
                     <div className="w3-container modal-test">
                         <div className="content">
-                            <img style={{ width: "300px" }} className="w3-image w3-round" src={evening.attraction.image} alt={evening.attraction.name} />
+                            <img style={{ width: "300px", border: "solid", borderColor: "black" }} className="w3-image w3-round" src={evening.attraction.image} alt={evening.attraction.name} />
                             <h3><b>Category: </b>{evening.attraction.category}</h3>
                             <h4><b>Description: </b>{evening.attraction.description}</h4>
                         </div>
@@ -450,7 +450,7 @@ function Day({ currentUser, setDays, day, breakfastRests, lunchRests, dinnerRest
                         <button onClick={() => handleEditEvent3(evening.id)}>Save</button>
                     </>
                 ) : (
-                        <button className="w3-button w3-blue w3-margin-right" onClick={toggleEditEvent3}>✎</button>
+                        <button className="w3-button w3-indigo w3-margin-right" onClick={toggleEditEvent3}>✎</button>
                     )}
 
             </div>

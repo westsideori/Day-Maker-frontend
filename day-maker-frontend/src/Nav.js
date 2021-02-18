@@ -18,7 +18,10 @@ function Nav({ currentUser, setCurrentUser }) {
 
     return (
         <nav className="w3-bar w3-indigo">
-            <NavLink className="w3-bar-item w3-button" exact to="/">Home</NavLink>
+            <NavLink className="w3-bar-item w3-button" exact to="/">
+                <img src="https://media.discordapp.net/attachments/799417690988216320/811709415996391444/image0.png?width=936&height=936" width="30px"/>
+            </NavLink>
+            {/* <NavLink className="w3-bar-item w3-button" exact to="/">Home</NavLink> */}
             <NavLink className="w3-bar-item w3-button" to="/attractions">Attractions</NavLink>
             <NavLink className="w3-bar-item w3-button" to="/restaurants">Restaurants</NavLink>
             {currentUser ? (
@@ -28,7 +31,7 @@ function Nav({ currentUser, setCurrentUser }) {
                         <NavLink className="w3-bar-item w3-button" to="/new_day">New Day</NavLink>
                     </>
                     <>
-                        <NavLink  className="w3-bar-item w3-button w3-right" onClick={logout} to="/">Logout</NavLink>
+                        <NavLink className="w3-bar-item w3-button w3-right" onClick={logout} to="/">Logout</NavLink>
                     </>
                 </>
             ) : (
